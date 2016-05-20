@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -16,9 +17,36 @@ public class SQLService {
     String hostIP = "192.168.43.52";
     String port = "49170";
 
+    public ArrayList<Game> gamesList;
+
     public SQLService(){
-        loadDriver();
-        openConnection();
+        /*loadDriver();
+        openConnection();*/
+
+        fillGamesList();
+    }
+
+    private void fillGamesList() {
+        gamesList = new ArrayList();
+
+
+        Game temp = new Game(1, "test");
+        temp.setRating(5);
+        temp.setViews(5);
+        temp.setGenre("pirmas");
+        gamesList.add(temp);
+
+        temp = new Game(1, "test2");
+        temp.setRating(4);
+        temp.setViews(10);
+        temp.setGenre("pirmas");
+        gamesList.add(temp);
+
+        temp = new Game(1, "test3");
+        temp.setRating(3.5f);
+        temp.setViews(110);
+        temp.setGenre("antras");
+        gamesList.add(temp);
     }
 
     private void loadDriver() {

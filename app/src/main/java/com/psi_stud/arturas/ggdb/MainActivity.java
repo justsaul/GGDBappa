@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnUserProfile;
     Button btnSearch;
     Button btnNews;
+    Button btnGamesList;
     public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +21,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnUserProfile = (Button) findViewById(R.id.btnUserProfile);
         btnNews = (Button) findViewById(R.id.btnNews);
+        btnGamesList = (Button) findViewById(R.id.btnGamesList);
 
         btnUserProfile.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
         btnNews.setOnClickListener(this);
+        btnGamesList.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        System.out.println("AAAA");
         switch (view.getId()) {
             case R.id.btnUserProfile:
                 if(user == null || !user.isLogedIn) {
@@ -44,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnNews:
                 startActivity(new Intent(this, NewsActivity.class));
+                break;
+            case R.id.btnGamesList:
+                startActivity(new Intent(this, GameListActivity.class));
                 break;
         }
     }

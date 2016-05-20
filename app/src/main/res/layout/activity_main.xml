@@ -22,4 +22,10 @@
         android:text="News"
         android:id="@+id/btnNews"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Games list"
+        android:id="@+id/btnGamesList" />
+
 </LinearLayout>

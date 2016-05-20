@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -14,8 +15,30 @@ import java.util.LinkedList;
 public class Game {
     private int gameID;
     private String name;
-    private String rating;
+    private float rating;
     private String description;
+    private int views;
+    private String genre;
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
 
     public Game(int gameID){
         this.gameID = gameID;
@@ -34,12 +57,12 @@ public class Game {
         this.description = description;
     }
 
-    public String getRating() {
+    public float getRating() {
 
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -57,7 +80,19 @@ public class Game {
     }
 
     public void loadGame(){
-        String hostIP = "10.3.3.125";
+        SQLService service = new SQLService();
+        ArrayList<Game> gamesList = service.gamesList;
+
+        for (Game game : gamesList) {
+            if (game.getGameID() == gameID) {
+                name = game.getName();
+                description = game.getDescription();
+                rating = game.getRating();
+                genre = game.getGenre();
+                views = game.getViews();
+            }
+        }
+        /*String hostIP = "10.3.3.125";
         String port = "49170";
         Connection con = null;
         Statement stat = null;
@@ -79,7 +114,7 @@ public class Game {
             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 
     @Override

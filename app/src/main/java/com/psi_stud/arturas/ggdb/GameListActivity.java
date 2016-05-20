@@ -22,7 +22,7 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
     //private EditText searchText;
     ListView listas;
     ArrayAdapter adapter;
-    ArrayList<Game> itemListTest; //listas i kuri bus ideti zaidimu pavadinimai
+    public ArrayList<Game> itemListTest; //listas i kuri bus ideti zaidimu pavadinimai
     //ArrayList<Game> filteredTest; //listas kuri rodys po searcho
     int newsIDNow;
     @Override
@@ -59,8 +59,8 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void fillList(){
-        Game temp = new Game(1, "test");
-        itemListTest.add(temp);
+        SQLService service = new SQLService();
+        itemListTest = service.gamesList;
     }
 
 }
