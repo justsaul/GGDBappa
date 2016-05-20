@@ -34,7 +34,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         // test game
         filteredTest = new ArrayList();
         itemListTest = new ArrayList(); // cia reiktu paduoti zaidimu pavadinimus
-        fillList();
+        //fillList();
+        //------------
+        Game x = new Game(123, "xui");
+        Game y = new Game(1234, "y");
+
+        itemListTest.add(x);
+        itemListTest.add(y);
+        //------------
         //
         listas = (ListView) findViewById(R.id.listView);
         btn = (Button) findViewById(R.id.button3);
@@ -81,7 +88,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public void fillList(){
+    /*public void fillList(){
         String hostIP = "10.3.3.125";
         String port = "49170";
         Connection con = null;
@@ -106,6 +113,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
 }

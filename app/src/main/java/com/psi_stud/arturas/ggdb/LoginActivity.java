@@ -34,8 +34,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
+                System.out.println(etUsername.getText().toString());
+                System.out.println(etPassword.getText().toString());
                 Login login = new Login(etUsername.getText().toString(), etPassword.getText().toString());
+                System.out.println(login.Init());
                 if(login.Init()){
+                    System.out.println("as cia");
                     MainActivity.user = login.getUser();
                     finish();
                 }

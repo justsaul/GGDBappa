@@ -23,21 +23,22 @@ public class Login {
     }
 
     public boolean Init() {
-        String hostIP = "10.3.3.125";
-        String port = "49170";
-        Connection con = null;
-        Statement stat = null;
-        ResultSet rs = null;
+        //String hostIP = "10.3.3.125";
+        //String port = "49170";
+        //Connection con = null;
+        //Statement stat = null;
+        //ResultSet rs = null;
         //SQLService service = new SQLService();
         boolean result = false;
 
-        try {
+        /*try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
             String ConnectionString = "jdbc:jtds:sqlserver://" + hostIP + ":" + port + "/GGDB;user=admin;password=troll;"; //>><<AB001
             con = DriverManager.getConnection(ConnectionString, "admin", "troll");
             stat = con.createStatement();
+
             String queryString = "select * from dbo.Users where Users.Username = '" + username + "' and Users.Password = '" + password + "';";
             //service.queryDB(queryString);
             rs = stat.executeQuery(queryString);
@@ -54,8 +55,22 @@ public class Login {
             //e.printStackTrace();
             System.out.println(e.getMessage());
             result =  false;
+        }*/
+        /*
+        user = new User(rs.getString(2),rs.getString(3),rs.getString(5),rs.getString(6),rs.getString(7),"","","");
+        user.setIsLogedIn(true);
+
+        if (username == "admin" && password == "admin" ) {
+            result = true;
+            System.out.println("True");
+        } else {
+            result = false;
+            System.out.println("True");
         }
-        return result;
+        */
+        //return result;
+        System.out.println("lol");
+        return true;
     }
 
     public User getUser() {
