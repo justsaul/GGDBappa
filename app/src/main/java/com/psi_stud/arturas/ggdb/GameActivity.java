@@ -15,14 +15,18 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Bundle b = getIntent().getExtras();
-
+        String a = Integer.toString(b.getInt("gameID"));
         game = new Game(b.getInt("gameID"));
 
-        game.loadGame();
+        //game.loadGame();
+        //tvDesc = (TextView) findViewById(R.id.tvDesc);
+        //tvGameName = (TextView) findViewById(R.id.tvGameName);
+        //tvDesc.setText(game.getDescription());
+        //tvGameName.setText(game.getName());
         tvDesc = (TextView) findViewById(R.id.tvDesc);
         tvGameName = (TextView) findViewById(R.id.tvGameName);
-        tvDesc.setText(game.getDescription());
-        tvGameName.setText(game.getName());
+        tvGameName.setText(a);
+
     }
 
     @Override

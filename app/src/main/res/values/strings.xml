@@ -13,4 +13,5 @@
     <string name="title_activity_news_content">NewsContentActivity</string>
     <string name="imageText">logo</string>
     <string name="title_activity_game_list">GameListActivity</string>
+    <string name="title_activity_dynamic_search">DynamicSearch</string>
 </resources>

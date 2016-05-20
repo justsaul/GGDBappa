@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.btnSearch:
-                startActivity(new Intent(this, SearchActivity.class));
+                startActivity(new Intent(this, DynamicSearch.class));
                 break;
             case R.id.btnNews:
                 startActivity(new Intent(this, NewsActivity.class));

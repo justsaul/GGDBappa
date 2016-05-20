@@ -36,13 +36,13 @@ public class SQLService {
         temp.setGenre("pirmas");
         gamesList.add(temp);
 
-        temp = new Game(1, "test2");
+        temp = new Game(2, "test2");
         temp.setRating(4);
         temp.setViews(10);
         temp.setGenre("pirmas");
         gamesList.add(temp);
 
-        temp = new Game(1, "test3");
+        temp = new Game(3, "test3");
         temp.setRating(3.5f);
         temp.setViews(110);
         temp.setGenre("antras");
