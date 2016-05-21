@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
-import java.util.prefs.PreferenceChangeEvent;
 
 
 /**
@@ -24,7 +23,7 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
 
     private static final String TAG = "SearchViewFilterMode";
 
-    ArrayList<Game> itemListTest;
+    ArrayList<Game> gamesList;
 
     private SearchView mSearchView;
     ListView mListView;
@@ -43,17 +42,17 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
 
         System.out.println(userAge);
 
-        itemListTest = new ArrayList();
+        gamesList = new ArrayList();
 
-        SQLService sqlS = new SQLService();
+        Game gameEntity = new Game();
 
         for (int i = 0; i < mStrings.length; i++) {
             mStrings[i] = "";
         }
 
-        itemListTest = sqlS.gamesList;
-        for (int i = 0; i < itemListTest.size(); i++) {
-            mStrings[i] = itemListTest.get(i).getName();
+        gamesList = gameEntity.getGamesList();
+        for (int i = 0; i < gamesList.size(); i++) {
+            mStrings[i] = gamesList.get(i).getName();
         }
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -70,14 +69,14 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
 
         mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0; i < itemListTest.size(); i++) {
-                    if (itemListTest.get(i).getName() == mListView.getItemAtPosition(position)) {
+                for (int i = 0; i < gamesList.size(); i++) {
+                    if (gamesList.get(i).getName() == mListView.getItemAtPosition(position)) {
                         ageOfUser = userAge;
                         System.out.println(ageOfUser);
-                        if(ageOfUser >= itemListTest.get(i).getAge()) {
+                        if(ageOfUser >= gamesList.get(i).getAge()) {
                             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                             Bundle b = new Bundle();
-                            b.putInt("gameID", itemListTest.get(i).getGameID());
+                            b.putInt("gameID", gamesList.get(i).getGameID());
                             intent.putExtras(b);
                             startActivity(intent);
                         } else {

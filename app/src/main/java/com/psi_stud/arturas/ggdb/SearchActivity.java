@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             while (rs.next()) {
                 System.out.println(rs.getInt(1)+" "+rs.getString(2));
                 Game temp = new Game(rs.getInt(1),rs.getString(2));
-                itemListTest.add(temp);
+                gamesList.add(temp);
             }
             con.close();
         } catch (Exception e) {

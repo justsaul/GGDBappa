@@ -36,7 +36,7 @@ public class NewsActivity extends AppCompatActivity implements AdapterView.OnIte
         itemListTest = new ArrayList(); // cia reiktu paduoti zaidimu pavadinimus
         fillList();
         //Game temp = new Game(1, "test");
-        //itemListTest.add(temp);
+        //gamesList.add(temp);
         //
         listas = (ListView) findViewById(R.id.listView);
         //btn = (Button) findViewById(R.id.button3);
@@ -53,11 +53,11 @@ public class NewsActivity extends AppCompatActivity implements AdapterView.OnIte
     //public void onClick(View view) {
     //  String text = searchText.getText().toString();
     //filteredTest.clear();
-    //for (int i = 0; i < itemListTest.size(); i++) {
-    //  String id = (String) itemListTest.get(i).getName();
+    //for (int i = 0; i < gamesList.size(); i++) {
+    //  String id = (String) gamesList.get(i).getName();
     //String noCaseId = id.toLowerCase();
     //if (noCaseId.contains(text)) {
-    //  filteredTest.add(itemListTest.get(i));
+    //  filteredTest.add(gamesList.get(i));
     //}
     //}
     //  adapter.notifyDataSetChanged();
