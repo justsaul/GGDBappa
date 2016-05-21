@@ -83,14 +83,16 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(false);
-        //mSearchView.setQueryHint(getString(R.string.cheese_hunt_hint));
+        mListView.setVisibility(View.INVISIBLE);
     }
 
     public boolean onQueryTextChange(String newText) {
         if (TextUtils.isEmpty(newText)) {
+            mListView.setVisibility(View.INVISIBLE);
             mListView.clearTextFilter();
         } else {
             mListView.setFilterText(newText.toString());
+            mListView.setVisibility(View.VISIBLE);
         }
         return true;
     }
