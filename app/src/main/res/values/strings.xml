@@ -14,4 +14,12 @@
     <string name="imageText">logo</string>
     <string name="title_activity_game_list">GameListActivity</string>
     <string name="title_activity_dynamic_search">DynamicSearch</string>
+
+    <string name="sort_prompt">Rūšiuoti pagal</string>
+
+    <string-array name="sort_array">
+        <item>Populiarumą</item>
+        <item>Naudotojų įvertinimą</item>
+        <item>Žanrus</item>
+    </string-array>
 </resources>

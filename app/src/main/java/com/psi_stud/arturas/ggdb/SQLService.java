@@ -47,6 +47,12 @@ public class SQLService {
         temp.setViews(110);
         temp.setGenre("antras");
         gamesList.add(temp);
+
+        temp = new Game(4, "test4");
+        temp.setRating(15f);
+        temp.setViews(14);
+        temp.setGenre("pirmas");
+        gamesList.add(temp);
     }
 
     private void loadDriver() {

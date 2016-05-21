@@ -4,12 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
     private Game game;
-    private TextView tvDesc;
-    private TextView tvGameName;
+    private TextView gameDesc, gameName, gameGenre, gameRating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +18,20 @@ public class GameActivity extends AppCompatActivity {
         String a = Integer.toString(b.getInt("gameID"));
         game = new Game(b.getInt("gameID"));
 
-        //game.loadGame();
+        game.loadGame();
+        gameDesc = (TextView) findViewById(R.id.tvDesc);
+        gameName = (TextView) findViewById(R.id.tvGameName);
+        gameGenre = (TextView) findViewById(R.id.gameGenre);
+        gameRating = (Button) findViewById(R.id.button);
+
+        gameDesc.setText(game.getDescription());
+        gameName.setText(game.getName());
+        gameGenre.setText(game.getGenre());
+        gameRating.setText(Float.toString(game.getRating()));
+
         //tvDesc = (TextView) findViewById(R.id.tvDesc);
         //tvGameName = (TextView) findViewById(R.id.tvGameName);
-        //tvDesc.setText(game.getDescription());
-        //tvGameName.setText(game.getName());
-        tvDesc = (TextView) findViewById(R.id.tvDesc);
-        tvGameName = (TextView) findViewById(R.id.tvGameName);
-        tvGameName.setText(a);
+        //tvGameName.setText(a);
 
     }
 

@@ -9,7 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,12 +20,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class GameListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GameListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
     //Button btn;
     //private EditText searchText;
     ListView listas;
     ArrayAdapter adapter;
-    public ArrayList<Game> itemListTest; //listas i kuri bus ideti zaidimu pavadinimai
+    ArrayList<Game> itemListTest; //listas i kuri bus ideti zaidimu pavadinimai
+    private Spinner sortSpinner;
     //ArrayList<Game> filteredTest; //listas kuri rodys po searcho
     int newsIDNow;
     @Override
@@ -46,6 +50,10 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
         listas.setClickable(true);
         listas.setOnItemClickListener(this);
 
+        Spinner sortSpinner = (Spinner) findViewById(R.id.sortSpinner);
+
+        // Spinner click listener
+        sortSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -61,6 +69,42 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
     public void fillList(){
         SQLService service = new SQLService();
         itemListTest = service.gamesList;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Pasirinkta: " + item, Toast.LENGTH_LONG).show();
+        ArrayList<Game> sortedList;
+        switch (item) {
+            case "Populiarumą":
+                sortedList = SortController.sortGamesByPopularity();
+                updateGamesList(sortedList);
+                break;
+            case "Naudotojų įvertinimą":
+                sortedList = SortController.sortGamesByRating();
+                updateGamesList(sortedList);
+                break;
+            case "Žanrus":
+                sortedList = SortController.sortGamesByGenre();
+                updateGamesList(sortedList);
+                break;
+        }
+    }
+
+    private void updateGamesList(ArrayList<Game> gamesList) {
+        listas = (ListView) findViewById(R.id.listView);
+
+        adapter.clear();
+        adapter.addAll(gamesList);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
     }
 
 }
