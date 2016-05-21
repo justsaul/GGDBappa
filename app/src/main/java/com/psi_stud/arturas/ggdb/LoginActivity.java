@@ -59,7 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                 }
                 else{
-                    System.out.println("Nope");
+                    Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+                    Bundle bErrMessage = new Bundle();
+                    bErrMessage.putString("ErrorMessage", "Blogi prisijungimo duomenys");
+                    intentErrorMessage.putExtras(bErrMessage);
+                    startActivity(intentErrorMessage);
                 }
                 break;
             case R.id.tvRegisterLink:

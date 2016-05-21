@@ -74,7 +74,13 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
                     if (itemListTest.get(i).getName() == mListView.getItemAtPosition(position)) {
                         ageOfUser = userAge;
                         System.out.println(ageOfUser);
-                        if(ageOfUser >= itemListTest.get(i).getAge()) {
+                        if(itemListTest.get(i).getAge() == 0) {
+                            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                            Bundle b = new Bundle();
+                            b.putInt("gameID", itemListTest.get(i).getGameID());
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        } else if(ageOfUser >= itemListTest.get(i).getAge()) {
                             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                             Bundle b = new Bundle();
                             b.putInt("gameID", itemListTest.get(i).getGameID());
@@ -84,7 +90,7 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
                             Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
                             Bundle bErrMessage = new Bundle();
                             if(ageOfUser == -1) {
-                                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziuas");
+                                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziaus");
                                 intentErrorMessage.putExtras(bErrMessage);
                             } else {
                                 bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
