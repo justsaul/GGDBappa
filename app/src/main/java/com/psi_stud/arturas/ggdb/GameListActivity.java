@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class GameListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
     //Button btn;
-    //private EditText searchText;
+    //private EditText searchText/;
     ListView listas;
     ArrayAdapter adapter;
     ArrayList<Game> itemListTest; //listas i kuri bus ideti zaidimu pavadinimai
