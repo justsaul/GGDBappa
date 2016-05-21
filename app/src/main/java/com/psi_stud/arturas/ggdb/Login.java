@@ -1,13 +1,20 @@
 package com.psi_stud.arturas.ggdb;
 
 import android.os.StrictMode;
+import android.util.Log;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Created by Arturas on 2015-12-14.
@@ -16,6 +23,8 @@ public class Login {
     private String username;
     private String password;
     private User user;
+
+    public int ageOfLoggedInUser = 0;
 
     public Login(String username, String password) {
         this.username = username;
@@ -29,7 +38,25 @@ public class Login {
         //Statement stat = null;
         //ResultSet rs = null;
         //SQLService service = new SQLService();
+
+        SQLService sqlS = new SQLService();
+
+        ArrayList<User> userList;
+        userList = new ArrayList();
+        userList = sqlS.userList;
+
         boolean result = false;
+
+        for(int i = 0; i < userList.size(); i++) {
+            if(username.equals(userList.get(i).getUsername()) &&
+                    password.equals(userList.get(i).getPassword())) {
+                ageOfLoggedInUser = userList.get(i).age;
+                authenticate();
+                return true;
+            } else {
+                System.out.println("nesutapo");
+            }
+        }
 
         /*try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -69,11 +96,14 @@ public class Login {
         }
         */
         //return result;
-        System.out.println("lol");
-        return true;
+        return result;
+    }
+
+    public void authenticate() {
     }
 
     public User getUser() {
+      //  user.age = ageOfLoggedInUser;
         return user;
     }
 }

@@ -1,7 +1,9 @@
 package com.psi_stud.arturas.ggdb;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,9 +31,17 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
     private Spinner sortSpinner;
     //ArrayList<Game> filteredTest; //listas kuri rodys po searcho
     int newsIDNow;
+    int ageOfUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int userAge;
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        userAge = saved_values.getInt("age", -1);
+        ageOfUser = userAge;
+        System.out.println(ageOfUser);
+
         setContentView(R.layout.activity_game_list);
 
         // test game
@@ -63,7 +73,20 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
         Bundle b = new Bundle();
         b.putInt("gameID", selectedGame.getGameID());
         intent.putExtras(b);
-        startActivity(intent);
+        if(ageOfUser >= itemListTest.get(position).getAge()) {
+            startActivity(intent);
+        }else {
+            Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+            Bundle bErrMessage = new Bundle();
+            if(ageOfUser == -1) {
+                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziuas");
+                intentErrorMessage.putExtras(bErrMessage);
+            } else {
+                bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
+                intentErrorMessage.putExtras(bErrMessage);
+            }
+            startActivity(intentErrorMessage);
+        }
     }
 
     public void fillList(){

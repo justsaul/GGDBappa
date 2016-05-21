@@ -14,6 +14,14 @@ public class User {
     private String gamelist;
     boolean isLogedIn;
 
+    public int age; //public bcuz i can
+
+    public User(String username, String password, int age) {
+        this.username = username;
+        this.password = password;
+        this.age = age;
+    }
+
     public User(String username, String password, String firstName, String lastName, String birthDate, String email, String gamelistID, String wishlistID){
         this.username = username;
         this.password = password;

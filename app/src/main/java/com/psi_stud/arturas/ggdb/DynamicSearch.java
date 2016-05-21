@@ -2,7 +2,9 @@ package com.psi_stud.arturas.ggdb;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.prefs.PreferenceChangeEvent;
 
 
 /**
@@ -27,21 +30,31 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
     ListView mListView;
     private ArrayAdapter<String> mAdapter;
 
+    int ageOfUser;
     //private final String[] mStrings = Cheeses.sCheeseStrings;
-    private String[] mStrings = {"bbb", "a", "aa"};
+    private String[] mStrings = new String[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final int userAge;
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        userAge = saved_values.getInt("age", -1);
+
+        System.out.println(userAge);
+
         itemListTest = new ArrayList();
 
-        Game x = new Game(123, "bbb");
-        Game y = new Game(1234, "a");
-        Game z = new Game(12341, "aa");
+        SQLService sqlS = new SQLService();
 
-        itemListTest.add(x);
-        itemListTest.add(y);
-        itemListTest.add(z);
+        for (int i = 0; i < mStrings.length; i++) {
+            mStrings[i] = "";
+        }
+
+        itemListTest = sqlS.gamesList;
+        for (int i = 0; i < itemListTest.size(); i++) {
+            mStrings[i] = itemListTest.get(i).getName();
+        }
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
@@ -57,24 +70,31 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
 
         mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("lol");
-                System.out.println(position);
-                System.out.println(mListView.getItemAtPosition(position));
-
                 for (int i = 0; i < itemListTest.size(); i++) {
                     if (itemListTest.get(i).getName() == mListView.getItemAtPosition(position)) {
-                        System.out.println("match");
-                        System.out.println(itemListTest.get(i).getGameID());
-                        Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-                        Bundle b = new Bundle();
-                        b.putInt("gameID", itemListTest.get(i).getGameID());
-                        intent.putExtras(b);
-                        startActivity(intent);
+                        ageOfUser = userAge;
+                        System.out.println(ageOfUser);
+                        if(ageOfUser >= itemListTest.get(i).getAge()) {
+                            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                            Bundle b = new Bundle();
+                            b.putInt("gameID", itemListTest.get(i).getGameID());
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        } else {
+                            Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+                            Bundle bErrMessage = new Bundle();
+                            if(ageOfUser == -1) {
+                                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziuas");
+                                intentErrorMessage.putExtras(bErrMessage);
+                            } else {
+                                bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
+                                intentErrorMessage.putExtras(bErrMessage);
+                            }
+                            startActivity(intentErrorMessage);
+                        }
                         break;
                     }
                 }
-                System.out.println(mListView.getItemAtPosition(position));
-
             }
         });
     }

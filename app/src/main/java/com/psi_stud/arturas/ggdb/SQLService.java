@@ -18,42 +18,59 @@ public class SQLService {
     String port = "49170";
 
     public ArrayList<Game> gamesList;
+    public ArrayList<User> userList;
 
     public SQLService(){
         /*loadDriver();
         openConnection();*/
 
         fillGamesList();
+        fillUserList();
     }
 
     private void fillGamesList() {
         gamesList = new ArrayList();
 
-
-        Game temp = new Game(1, "test");
+        Game temp = new Game(1, "test(age13)");
         temp.setRating(5);
         temp.setViews(5);
         temp.setGenre("pirmas");
+        temp.setAge(13);
         gamesList.add(temp);
 
-        temp = new Game(2, "test2");
+        temp = new Game(2, "test2(age18)");
         temp.setRating(4);
         temp.setViews(10);
         temp.setGenre("pirmas");
+        temp.setAge(18);
         gamesList.add(temp);
 
-        temp = new Game(3, "test3");
+        temp = new Game(3, "test3(age100)");
         temp.setRating(3.5f);
         temp.setViews(110);
         temp.setGenre("antras");
+        temp.setAge(100);
         gamesList.add(temp);
 
-        temp = new Game(4, "test4");
+        temp = new Game(4, "test4(age0)");
         temp.setRating(15f);
         temp.setViews(14);
         temp.setGenre("pirmas");
+        temp.setAge(0);
         gamesList.add(temp);
     }
+
+    private void fillUserList() {
+        userList = new ArrayList();
+
+        User temp = new User("a", "a", 18);
+        userList.add(temp);
+
+        temp = new User("b", "b", 3);
+        userList.add(temp);
+
+    }
+
 
     private void loadDriver() {
         try {

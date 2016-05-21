@@ -19,6 +19,15 @@ public class Game {
     private String description;
     private int views;
     private String genre;
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getGenre() {
         return genre;
@@ -90,6 +99,7 @@ public class Game {
                 rating = game.getRating();
                 genre = game.getGenre();
                 views = game.getViews();
+                age = game.getAge();
             }
         }
         /*String hostIP = "10.3.3.125";

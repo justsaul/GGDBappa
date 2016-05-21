@@ -27,32 +27,33 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".UserProfileActivity"
-            android:label="@string/title_activity_user_profile"></activity>
+            android:label="@string/title_activity_user_profile" />
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"></activity>
+            android:label="@string/title_activity_register" />
         <activity
             android:name=".GameActivity"
-            android:label="@string/title_activity_game"></activity>
+            android:label="@string/title_activity_game" />
         <activity
             android:name=".SearchActivity"
-            android:label="@string/title_activity_search"></activity>
+            android:label="@string/title_activity_search" />
         <activity
             android:name=".NewsActivity"
-            android:label="@string/title_activity_news"></activity>
+            android:label="@string/title_activity_news" />
         <activity
             android:name=".NewsContentActivity"
-            android:label="@string/title_activity_news_content"></activity>
+            android:label="@string/title_activity_news_content" />
         <activity
             android:name=".GameListActivity"
-            android:label="@string/title_activity_game_list"></activity>
+            android:label="@string/title_activity_game_list" />
         <activity
             android:name=".DynamicSearch"
             android:label="@string/title_activity_dynamic_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MessageActivity"></activity>
     </application>
 
 </manifest>
