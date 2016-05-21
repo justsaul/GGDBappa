@@ -8,54 +8,33 @@ import java.util.ArrayList;
 public class SortController {
 
     public static ArrayList<Game> sortGamesByPopularity() {
-        SQLService service = new SQLService();
-        ArrayList<Game> gamesList = service.gamesList;
+        Game gameEntity = new Game();
+        ArrayList<Game> gamesList = sortGames("views", gameEntity.getGamesList());
 
-        Game temp;
-        for(int i=0; i < gamesList.size()-1; i++){
-            for(int j=1; j < gamesList.size()-i; j++){
-                if(gamesList.get(j-1).getViews() < gamesList.get(j).getViews()){
-                    temp = gamesList.get(j-1);
-                    gamesList.set(j-1, gamesList.get(j));
-                    gamesList.set(j, temp);
-                }
-            }
-        }
-        for(int i=0; i < gamesList.size(); i++) {
-            System.out.println(gamesList.get(i).getName());
-        }
         return gamesList;
     }
 
     public static ArrayList<Game> sortGamesByGenre() {
-        SQLService service = new SQLService();
-        ArrayList<Game> gamesList = service.gamesList;
+        Game gameEntity = new Game();
+        ArrayList<Game> gamesList = sortGames("genre", gameEntity.getGamesList());
 
-        Game temp;
-        for(int i=0; i < gamesList.size()-1; i++){
-
-            for(int j=1; j < gamesList.size()-i; j++){
-                if(gamesList.get(j-1).getGenre().compareTo(gamesList.get(j).getGenre()) > 0){
-                    temp = gamesList.get(j-1);
-                    gamesList.set(j-1, gamesList.get(j));
-                    gamesList.set(j, temp);
-                }
-            }
-        }
-        for(int i=0; i < gamesList.size(); i++) {
-            System.out.println(gamesList.get(i).getName());
-        }
         return gamesList;
     }
 
     public static ArrayList<Game> sortGamesByRating() {
-        SQLService service = new SQLService();
-        ArrayList<Game> gamesList = service.gamesList;
+        Game gameEntity = new Game();
+        ArrayList<Game> gamesList = sortGames("rating", gameEntity.getGamesList());
 
+        return gamesList;
+    }
+
+    private static ArrayList<Game> sortGames(String key, ArrayList<Game> gamesList) {
         Game temp;
         for(int i=0; i < gamesList.size()-1; i++){
             for(int j=1; j < gamesList.size()-i; j++){
-                if(gamesList.get(j-1).getRating() < gamesList.get(j).getRating()){
+                if((key.equals("rating") && gamesList.get(j-1).getRating() < gamesList.get(j).getRating())
+                        || (key.equals("genre") && gamesList.get(j-1).getGenre().compareTo(gamesList.get(j).getGenre()) > 0)
+                        || (key.equals("views") && gamesList.get(j-1).getViews() < gamesList.get(j).getViews())){
                     temp = gamesList.get(j-1);
                     gamesList.set(j-1, gamesList.get(j));
                     gamesList.set(j, temp);

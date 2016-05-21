@@ -21,6 +21,9 @@ public class Game {
     private String genre;
     private int age;
 
+    public Game() {
+    }
+
     public int getAge() {
         return age;
     }
@@ -89,10 +92,7 @@ public class Game {
     }
 
     public void loadGame(){
-        SQLService service = new SQLService();
-        ArrayList<Game> gamesList = service.gamesList;
-
-        for (Game game : gamesList) {
+        for (Game game : getGamesList()) {
             if (game.getGameID() == gameID) {
                 name = game.getName();
                 description = game.getDescription();
@@ -130,5 +130,39 @@ public class Game {
     @Override
     public String toString() {
         return name;
+    }
+
+    public ArrayList<Game> getGamesList() {
+        ArrayList<Game> gamesList = new ArrayList<Game>();
+
+        Game temp = new Game(1, "test(age13)");
+        temp.setRating(5);
+        temp.setViews(5);
+        temp.setGenre("pirmas");
+        temp.setAge(13);
+        gamesList.add(temp);
+
+        temp = new Game(2, "test2(age18)");
+        temp.setRating(4);
+        temp.setViews(10);
+        temp.setGenre("pirmas");
+        temp.setAge(18);
+        gamesList.add(temp);
+
+        temp = new Game(3, "test3(age100)");
+        temp.setRating(3.5f);
+        temp.setViews(110);
+        temp.setGenre("antras");
+        temp.setAge(100);
+        gamesList.add(temp);
+
+        temp = new Game(4, "test4(age0)");
+        temp.setRating(15f);
+        temp.setViews(14);
+        temp.setGenre("pirmas");
+        temp.setAge(0);
+        gamesList.add(temp);
+
+        return gamesList;
     }
 }
