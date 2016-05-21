@@ -76,7 +76,7 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
             Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
             Bundle bErrMessage = new Bundle();
             if(ageOfUser == -1) {
-                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziuas");
+                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziaus");
                 intentErrorMessage.putExtras(bErrMessage);
             } else {
                 bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");

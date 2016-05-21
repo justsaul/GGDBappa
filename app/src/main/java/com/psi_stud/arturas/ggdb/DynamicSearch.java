@@ -66,14 +66,20 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
                 mStrings));
         mListView.setTextFilterEnabled(true);
         setupSearchView();
-
+        
         mListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 for (int i = 0; i < gamesList.size(); i++) {
                     if (gamesList.get(i).getName() == mListView.getItemAtPosition(position)) {
                         ageOfUser = userAge;
                         System.out.println(ageOfUser);
-                        if(ageOfUser >= gamesList.get(i).getAge()) {
+                        if(gamesList.get(i).getAge() == 0) {
+                            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                            Bundle b = new Bundle();
+                            b.putInt("gameID", gamesList.get(i).getGameID());
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        }else if(ageOfUser >= gamesList.get(i).getAge()) {
                             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                             Bundle b = new Bundle();
                             b.putInt("gameID", gamesList.get(i).getGameID());
