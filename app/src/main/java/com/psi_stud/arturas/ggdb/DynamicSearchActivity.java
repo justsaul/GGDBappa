@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Shows a list that can be filtered in-place with a SearchView in non-iconified mode.
  */
-public class DynamicSearch extends Activity implements SearchView.OnQueryTextListener {
+public class DynamicSearchActivity extends Activity implements SearchView.OnQueryTextListener {
 
    // private static final String TAG = "SearchViewFilterMode";
 

@@ -50,7 +50,7 @@
             android:name=".GameListActivity"
             android:label="@string/title_activity_game_list" />
         <activity
-            android:name=".DynamicSearch"
+            android:name=".DynamicSearchActivity"
             android:label="@string/title_activity_dynamic_search"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MessageActivity"></activity>
