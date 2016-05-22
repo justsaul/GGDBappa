@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Laurynas on 5/21/2016.
  */
-public class SortController {
+public class SortPresenter {
 
     public static ArrayList<Game> sortGamesByPopularity() {
         Game gameEntity = new Game();

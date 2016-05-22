@@ -99,15 +99,15 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
         ArrayList<Game> sortedList;
         switch (item) {
             case "Populiarumą":
-                sortedList = SortController.sortGamesByPopularity();
+                sortedList = SortPresenter.sortGamesByPopularity();
                 updateGamesList(sortedList);
                 break;
             case "Naudotojų įvertinimą":
-                sortedList = SortController.sortGamesByRating();
+                sortedList = SortPresenter.sortGamesByRating();
                 updateGamesList(sortedList);
                 break;
             case "Žanrus":
-                sortedList = SortController.sortGamesByGenre();
+                sortedList = SortPresenter.sortGamesByGenre();
                 updateGamesList(sortedList);
                 break;
         }
