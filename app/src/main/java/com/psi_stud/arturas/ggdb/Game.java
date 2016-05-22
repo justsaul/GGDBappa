@@ -136,6 +136,7 @@ public class Game {
         ArrayList<Game> gamesList = new ArrayList<Game>();
 
         Game temp = new Game(1, "test(age13)");
+        temp.setDescription("Labai labai labai ilgas aprasymas");
         temp.setRating(5);
         temp.setViews(5);
         temp.setGenre("pirmas");
@@ -143,6 +144,7 @@ public class Game {
         gamesList.add(temp);
 
         temp = new Game(2, "test2(age18)");
+        temp.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
         temp.setRating(4);
         temp.setViews(10);
         temp.setGenre("pirmas");
@@ -150,6 +152,7 @@ public class Game {
         gamesList.add(temp);
 
         temp = new Game(3, "test3(age100)");
+        temp.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
         temp.setRating(3.5f);
         temp.setViews(110);
         temp.setGenre("antras");
@@ -157,6 +160,7 @@ public class Game {
         gamesList.add(temp);
 
         temp = new Game(4, "test4(age0)");
+        temp.setDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
         temp.setRating(15f);
         temp.setViews(14);
         temp.setGenre("pirmas");

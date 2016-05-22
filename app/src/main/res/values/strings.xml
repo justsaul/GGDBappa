@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">GGDB</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="userProfileButtonString">User Profile</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_user_profile">UserProfileActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_game">GameActivity</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="title_activity_news">NewsActivity</string>
-    <string name="title_activity_news_content">NewsContentActivity</string>
+    <string name="hello_world">Sveikas pasauli!</string>
+    <string name="userProfileButtonString">Vartotojo profilis</string>
+    <string name="action_settings">Nustatymai</string>
+    <string name="title_activity_login">Prisijungimas</string>
+    <string name="title_activity_user_profile">Vartotojo profilis</string>
+    <string name="title_activity_register">Registracija</string>
+    <string name="title_activity_game">Žaidimas</string>
+    <string name="title_activity_search">Paieška</string>
+    <string name="title_activity_news">Naujienos</string>
+    <string name="title_activity_news_content">Straipsnis</string>
     <string name="imageText">logo</string>
-    <string name="title_activity_game_list">GameListActivity</string>
-    <string name="title_activity_dynamic_search">DynamicSearch</string>
+    <string name="title_activity_game_list">Žaidimų sąrašas</string>
+    <string name="title_activity_dynamic_search">Paieška</string>
 
     <string name="sort_prompt">Rūšiuoti pagal</string>
 

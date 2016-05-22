@@ -31,31 +31,14 @@
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/tvGamelist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="20dp"
-        android:text="Add to Game List" />
-
-    <TextView
-        android:id="@+id/tvWishList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvDesc"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:text="Add to Wishlist" />
-
-    <TextView
         android:id="@+id/tvDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvGamelist"
         android:layout_marginTop="20dp"
         android:text="Labai labai labai ilgas aprasymas kuris eina per pora eiluciu nes kitaip bus nekas"
         android:textAlignment="center"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:layout_below="@+id/button" />
 
     <ExpandableListView
         android:id="@+id/expandableListView"
