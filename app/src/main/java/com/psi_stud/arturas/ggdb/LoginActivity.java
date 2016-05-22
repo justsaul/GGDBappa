@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     public void authenticate(int age) throws IOException {
+        System.out.println("as cia");
+        System.out.println(age);
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = saved_values.edit();
         editor.putInt("age", age);

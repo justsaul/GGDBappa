@@ -24,12 +24,13 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
     //ArrayList<Game> filteredTest; //listas kuri rodys po searcho
     int newsIDNow;
     int ageOfUser;
+    int userAge;
+    SharedPreferences saved_values;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int userAge;
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userAge = saved_values.getInt("age", -1);
         ageOfUser = userAge;
         System.out.println(ageOfUser);
@@ -58,31 +59,37 @@ public class GameListActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Game selectedGame = gamesList.get(position);
-        Intent intent = new Intent(this, GameActivity.class);
-        Bundle b = new Bundle();
-        b.putInt("gameID", selectedGame.getGameID());
-        intent.putExtras(b);
 
-        if(gamesList.get(position).getAge() == 0) {
-            intent = new Intent(getApplicationContext(), GameActivity.class);
-            b = new Bundle();
+        GamePresenter gamePresenter = new GamePresenter();
+        UserPresenter userPresenter = new UserPresenter();
+
+        userAge = saved_values.getInt("age", -1);
+        ageOfUser = userAge;
+        if(gamePresenter.isGameCensored(gamesList.get(position).getAge())) {
+            if(userPresenter.isUserSignedUp(ageOfUser)) {
+                if(userPresenter.isAppropriateAge(ageOfUser, gamesList.get(position).getAge())) {
+                    Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("gameID", gamesList.get(position).getGameID());
+                    intent.putExtras(b);
+                    startActivity(intent);
+                } else {
+                    Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+                    Bundle bErrMessage = new Bundle();
+                    bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
+                    intentErrorMessage.putExtras(bErrMessage);
+                    startActivity(intentErrorMessage);
+                }
+            } else {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        } else {
+            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+            Bundle b = new Bundle();
             b.putInt("gameID", gamesList.get(position).getGameID());
             intent.putExtras(b);
             startActivity(intent);
-        } else if(ageOfUser >= gamesList.get(position).getAge()) {
-            startActivity(intent);
-        }else {
-            Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
-            Bundle bErrMessage = new Bundle();
-            if(ageOfUser == -1) {
-                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziaus");
-                intentErrorMessage.putExtras(bErrMessage);
-            } else {
-                bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
-                intentErrorMessage.putExtras(bErrMessage);
-            }
-            startActivity(intentErrorMessage);
         }
     }
 

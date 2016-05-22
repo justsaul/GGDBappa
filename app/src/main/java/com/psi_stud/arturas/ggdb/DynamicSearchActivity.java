@@ -26,17 +26,18 @@ public class DynamicSearchActivity extends Activity implements SearchView.OnQuer
     private SearchView mSearchView;
     ListView mListView;
     private ArrayAdapter<String> mAdapter;
-
+    int userAge;
     int ageOfUser;
     ArrayList<Game> gamesList;
+    SharedPreferences saved_values;
     private String[] mStrings = new String[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final int userAge;
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        userAge = saved_values.getInt("age", -1);
+
+        saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //userAge = saved_values.getInt("age", -1);
 
         gamesList = new ArrayList();
         fillList();
@@ -57,25 +58,38 @@ public class DynamicSearchActivity extends Activity implements SearchView.OnQuer
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 for (int i = 0; i < gamesList.size(); i++) {
                     if (gamesList.get(i).getName() == mListView.getItemAtPosition(position)) {
-                        ageOfUser = userAge;
                         System.out.println(ageOfUser);
-                        if((gamesList.get(i).getAge() == 0) || (ageOfUser >= gamesList.get(i).getAge())){
+
+                        GamePresenter gamePresenter = new GamePresenter();
+                        UserPresenter userPresenter = new UserPresenter();
+
+                        userAge = saved_values.getInt("age", -1);
+                        ageOfUser = userAge;
+                        if(gamePresenter.isGameCensored(gamesList.get(i).getAge())) {
+                            if(userPresenter.isUserSignedUp(ageOfUser)) {
+                                if(userPresenter.isAppropriateAge(ageOfUser, gamesList.get(i).getAge())) {
+                                    Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                                    Bundle b = new Bundle();
+                                    b.putInt("gameID", gamesList.get(i).getGameID());
+                                    intent.putExtras(b);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+                                    Bundle bErrMessage = new Bundle();
+                                    bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
+                                    intentErrorMessage.putExtras(bErrMessage);
+                                    startActivity(intentErrorMessage);
+                                }
+                            } else {
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        } else {
                             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                             Bundle b = new Bundle();
                             b.putInt("gameID", gamesList.get(i).getGameID());
                             intent.putExtras(b);
                             startActivity(intent);
-                        } else {
-                            Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
-                            Bundle bErrMessage = new Bundle();
-                            if(ageOfUser == -1) {
-                                bErrMessage.putString("ErrorMessage", "Prisijunkite, siam pasirinkimui reikia jusu amziuas");
-                                intentErrorMessage.putExtras(bErrMessage);
-                            } else {
-                                bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
-                                intentErrorMessage.putExtras(bErrMessage);
-                            }
-                            startActivity(intentErrorMessage);
                         }
                         break;
                     }
