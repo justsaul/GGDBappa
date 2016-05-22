@@ -2,9 +2,6 @@ package com.psi_stud.arturas.ggdb;
 
 import java.util.ArrayList;
 
-/**
- * Created by Laurynas on 5/21/2016.
- */
 public class SortPresenter {
 
     public static ArrayList<Game> sortGamesByPopularity() {

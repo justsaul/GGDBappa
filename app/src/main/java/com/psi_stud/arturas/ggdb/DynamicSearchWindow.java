@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Shows a list that can be filtered in-place with a SearchView in non-iconified mode.
  */
-public class DynamicSearchActivity extends Activity implements SearchView.OnQueryTextListener {
+public class DynamicSearchWindow extends Activity implements SearchView.OnQueryTextListener {
 
    // private static final String TAG = "SearchViewFilterMode";
 
@@ -68,24 +68,24 @@ public class DynamicSearchActivity extends Activity implements SearchView.OnQuer
                         if(gamePresenter.isGameCensored(gamesList.get(i).getAge())) {
                             if(userPresenter.isUserSignedUp(ageOfUser)) {
                                 if(userPresenter.isAppropriateAge(ageOfUser, gamesList.get(i).getAge())) {
-                                    Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), GameWindow.class);
                                     Bundle b = new Bundle();
                                     b.putInt("gameID", gamesList.get(i).getGameID());
                                     intent.putExtras(b);
                                     startActivity(intent);
                                 } else {
-                                    Intent intentErrorMessage = new Intent(getApplicationContext(), MessageActivity.class);
+                                    Intent intentErrorMessage = new Intent(getApplicationContext(), MessageWindow.class);
                                     Bundle bErrMessage = new Bundle();
                                     bErrMessage.putString("ErrorMessage", "Jusu amzius nera tinkamas siam zaidimui");
                                     intentErrorMessage.putExtras(bErrMessage);
                                     startActivity(intentErrorMessage);
                                 }
                             } else {
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), LoginWindow.class);
                                 startActivity(intent);
                             }
                         } else {
-                            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), GameWindow.class);
                             Bundle b = new Bundle();
                             b.putInt("gameID", gamesList.get(i).getGameID());
                             intent.putExtras(b);
