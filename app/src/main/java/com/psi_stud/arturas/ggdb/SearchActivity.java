@@ -36,7 +36,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         itemListTest = new ArrayList(); // cia reiktu paduoti zaidimu pavadinimus
         //fillList();
         //------------
-        Game x = new Game(123, "xui");
+        Game x = new Game(123, "x");
         Game y = new Game(1234, "y");
 
         itemListTest.add(x);

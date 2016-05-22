@@ -21,16 +21,14 @@ import java.util.ArrayList;
  */
 public class DynamicSearch extends Activity implements SearchView.OnQueryTextListener {
 
-    private static final String TAG = "SearchViewFilterMode";
-
-    ArrayList<Game> gamesList;
+   // private static final String TAG = "SearchViewFilterMode";
 
     private SearchView mSearchView;
     ListView mListView;
     private ArrayAdapter<String> mAdapter;
 
     int ageOfUser;
-    //private final String[] mStrings = Cheeses.sCheeseStrings;
+    ArrayList<Game> gamesList;
     private String[] mStrings = new String[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +38,8 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         userAge = saved_values.getInt("age", -1);
 
-        System.out.println(userAge);
-
         gamesList = new ArrayList();
-
-        Game gameEntity = new Game();
-
-        for (int i = 0; i < mStrings.length; i++) {
-            mStrings[i] = "";
-        }
-
-        gamesList = gameEntity.getGamesList();
-        for (int i = 0; i < gamesList.size(); i++) {
-            mStrings[i] = gamesList.get(i).getName();
-        }
+        fillList();
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
@@ -73,13 +59,7 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
                     if (gamesList.get(i).getName() == mListView.getItemAtPosition(position)) {
                         ageOfUser = userAge;
                         System.out.println(ageOfUser);
-                        if(gamesList.get(i).getAge() == 0) {
-                            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-                            Bundle b = new Bundle();
-                            b.putInt("gameID", gamesList.get(i).getGameID());
-                            intent.putExtras(b);
-                            startActivity(intent);
-                        }else if(ageOfUser >= gamesList.get(i).getAge()) {
+                        if((gamesList.get(i).getAge() == 0) || (ageOfUser >= gamesList.get(i).getAge())){
                             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
                             Bundle b = new Bundle();
                             b.putInt("gameID", gamesList.get(i).getGameID());
@@ -120,6 +100,12 @@ public class DynamicSearch extends Activity implements SearchView.OnQueryTextLis
             mListView.setVisibility(View.VISIBLE);
         }
         return true;
+    }
+
+    public void fillList() {
+        SearchPresenter searchPresenter = new SearchPresenter();
+        mStrings = searchPresenter.getmStrings();
+        gamesList = searchPresenter.getgameList();
     }
 
     public boolean onQueryTextSubmit(String query) {
